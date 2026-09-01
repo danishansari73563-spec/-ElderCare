@@ -851,7 +851,8 @@ tbody tr:hover {
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.share-btn {
   min-width: 34px;
 
   height: 34px;
@@ -871,6 +872,10 @@ tbody tr:hover {
 
 .delete-btn:hover {
   background: #ffecec;
+}
+
+.share-btn:hover {
+  background: #eafff2;
 }
 
 

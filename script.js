@@ -279,6 +279,15 @@ function renderElderlyData() {
                 <div class="action-buttons">
                     <button
                         type="button"
+                        class="share-btn"
+                        onclick="shareElderly(${index})"
+                        title="Share this record"
+                    >
+                        📤
+                    </button>
+
+                    <button
+                        type="button"
                         class="edit-btn"
                         onclick="editElderly(${index})"
                     >
@@ -298,6 +307,100 @@ function renderElderlyData() {
 
         tableBody.appendChild(row);
     });
+}
+
+
+// ============================================
+// 5B. SHARE ELDERLY RECORD
+// ============================================
+
+function buildElderlyShareText(person) {
+    const personMedicines = medicineData.filter(
+        med => med.elderly === person.name
+    );
+
+    const lines = [];
+
+    lines.push(`👴 ${person.name || "-"}`);
+    lines.push(`Age: ${person.age || "-"}  |  Gender: ${person.gender || "-"}`);
+    lines.push(`Health Problem: ${person.health || "-"}`);
+
+    if (person.bloodGroup) {
+        lines.push(`Blood Group: ${person.bloodGroup}`);
+    }
+
+    if (personMedicines.length > 0) {
+        lines.push("");
+        lines.push("💊 Medicines:");
+
+        personMedicines.forEach(med => {
+            const times = Array.isArray(med.times) && med.times.length > 0
+                ? med.times.map(t => `${t.type} ${formatTime(t.time)}`).join(", ")
+                : "-";
+
+            lines.push(`- ${med.medicine} (${med.dosage}) — ${med.frequency} — ${times}`);
+        });
+    }
+
+    if (person.contact) {
+        lines.push("");
+        lines.push(`📞 Emergency Contact: ${person.contact}`);
+    }
+
+    if (person.caregiverName || person.caregiverContact) {
+        lines.push(
+            `🧑‍⚕️ Caregiver: ${person.caregiverName || "-"} ${
+                person.caregiverContact ? "(" + person.caregiverContact + ")" : ""
+            }`
+        );
+    }
+
+    if (person.address) {
+        lines.push(`📍 Address: ${person.address}`);
+    }
+
+    if (person.notes) {
+        lines.push("");
+        lines.push(`Notes: ${person.notes}`);
+    }
+
+    return lines.join("\n");
+}
+
+function shareElderly(index) {
+    const person = elderlyData[index];
+
+    if (!person) return;
+
+    const text = buildElderlyShareText(person);
+
+    if (navigator.share) {
+        navigator
+            .share({
+                title: `${person.name || "Elderly"} - Care Record`,
+                text: text
+            })
+            .catch(() => {
+                // User cancelled or share failed silently; no action needed.
+            });
+
+        return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+                alert("Sharing is not supported on this device. Record copied to clipboard instead.");
+            })
+            .catch(() => {
+                alert(text);
+            });
+
+        return;
+    }
+
+    alert(text);
 }
 
 
