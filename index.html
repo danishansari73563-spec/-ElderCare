@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElderCare - Elderly Care Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">❤️</div>
+
+            <div>
+                <h2>ElderCare</h2>
+                <span>Care Management</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-item active"
+                onclick="showSection('dashboard')"
+            >
+                <span>🏠</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="showSection('elderly')"
+            >
+                <span>👴</span>
+                <span>Elderly Data</span>
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="showSection('medicines')"
+            >
+                <span>💊</span>
+                <span>Medicine Reminders</span>
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="showSection('appointments')"
+            >
+                <span>📅</span>
+                <span>Appointments</span>
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="showSection('reports')"
+            >
+                <span>📊</span>
+                <span>Reports</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="settings-btn"
+                onclick="openSettings()"
+            >
+                ⚙️
+                <span>Settings</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h1 id="pageTitle">Dashboard</h1>
+
+                <p>
+                    Elderly Care Needs Survey & Reminder App
+                </p>
+
+            </div>
+
+            <button
+                class="top-settings-btn"
+                onclick="openSettings()"
+                title="Settings"
+            >
+                ⚙️
+            </button>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section
+            id="dashboard"
+            class="section active-section"
+        >
+
+            <!-- WELCOME CARD -->
+            <div class="welcome-card">
+
+                <div>
+
+                    <span class="welcome-label">
+                        Welcome to ElderCare
+                    </span>
+
+                    <h2>
+                        Caring for seniors,
+                        <br>
+                        making life easier.
+                    </h2>
+
+                    <p>
+                        Manage elderly information, multiple medicine
+                        reminders and health appointments in one place.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+                    ❤️
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon elderly-icon">
+                        👴
+                    </div>
+
+                    <div>
+                        <span>Elderly People</span>
+                        <strong id="elderlyCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon medicine-icon">
+                        💊
+                    </div>
+
+                    <div>
+                        <span>Medicines</span>
+                        <strong id="medicineCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon appointment-icon">
+                        📅
+                    </div>
+
+                    <div>
+                        <span>Appointments</span>
+                        <strong id="appointmentCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon reminder-icon">
+                        🔔
+                    </div>
+
+                    <div>
+                        <span>Active Reminders</span>
+                        <strong id="reminderCount">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD SUMMARY -->
+            <div class="dashboard-grid">
+
+                <!-- CARE SUMMARY -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Care Summary</h2>
+
+                            <p>
+                                Current project overview
+                            </p>
+
+                        </div>
+
+                        <span class="card-header-icon">
+                            ❤️
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-list">
+
+                        <div class="summary-item">
+                            <span>👴 Elderly People</span>
+                            <strong id="summaryElderly">0</strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span>💊 Active Medicines</span>
+                            <strong id="summaryMedicines">0</strong>
+                        </div>
+
+                        <div class="summary-item">
+                            <span>📅 Upcoming Appointments</span>
+                            <strong id="summaryAppointments">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>Quick Actions</h2>
+
+                            <p>
+                                Manage your care records
+                            </p>
+
+                        </div>
+
+                        <span class="card-header-icon">
+                            ⚡
+                        </span>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button
+                            onclick="openElderlyForm()"
+                            class="quick-action"
+                        >
+
+                            <span>👴</span>
+
+                            <div>
+
+                                <strong>Add Elderly Person</strong>
+
+                                <small>
+                                    Create a new care record
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="openMedicineForm()"
+                            class="quick-action"
+                        >
+
+                            <span>💊</span>
+
+                            <div>
+
+                                <strong>Add Medicine</strong>
+
+                                <small>
+                                    Add medicine with its own schedule
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            onclick="openAppointmentForm()"
+                            class="quick-action"
+                        >
+
+                            <span>📅</span>
+
+                            <div>
+
+                                <strong>Add Appointment</strong>
+
+                                <small>
+                                    Schedule a health appointment
+                                </small>
+
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ELDERLY DATA -->
+        <section
+            id="elderly"
+            class="section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Elderly Data</h2>
+
+                    <p>
+                        Manage elderly care information
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openElderlyForm()"
+                >
+                    + Add Elderly Person
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="searchElderly"
+                    placeholder="Search by name, health problem or medicine..."
+                >
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Health Problem</th>
+                            <th>Medicines</th>
+                            <th>Emergency Contact</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="elderlyTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEDICINES -->
+        <section
+            id="medicines"
+            class="section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Medicine Reminders</h2>
+
+                    <p>
+                        Add multiple medicines and separate times for each medicine
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openMedicineForm()"
+                >
+                    + Add Medicine
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="searchMedicine"
+                    placeholder="Search medicine or elderly person..."
+                >
+
+            </div>
+
+
+            <div
+                id="medicineList"
+                class="medicine-grid"
+            ></div>
+
+        </section>
+
+
+        <!-- APPOINTMENTS -->
+        <section
+            id="appointments"
+            class="section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Health Appointments</h2>
+
+                    <p>
+                        Manage upcoming health appointments
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openAppointmentForm()"
+                >
+                    + Add Appointment
+                </button>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="searchAppointment"
+                    placeholder="Search doctor, person or appointment type..."
+                >
+
+            </div>
+
+
+            <div
+                id="appointmentList"
+                class="appointment-list"
+            ></div>
+
+        </section>
+
+
+        <!-- REPORTS -->
+        <section
+            id="reports"
+            class="section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Reports & Data Analysis</h2>
+
+                    <p>
+                        Overview of collected care data
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-grid">
+
+                <div class="report-card">
+
+                    <span class="report-icon">
+                        👴
+                    </span>
+
+                    <div>
+
+                        <span>Total Elderly</span>
+
+                        <strong id="reportElderlyCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span class="report-icon">
+                        💊
+                    </span>
+
+                    <div>
+
+                        <span>Total Medicines</span>
+
+                        <strong id="reportMedicineCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span class="report-icon">
+                        📅
+                    </span>
+
+                    <div>
+
+                        <span>Total Appointments</span>
+
+                        <strong id="reportAppointmentCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <span class="report-icon">
+                        🔔
+                    </span>
+
+                    <div>
+
+                        <span>Active Reminders</span>
+
+                        <strong id="reportReminderCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-info-card">
+
+                <div class="report-info-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <h3>Project Data Analysis</h3>
+
+                    <p>
+                        This dashboard provides a simple overview
+                        of elderly care records, multiple medicine
+                        reminders and health appointments collected
+                        for the ElderCare field project.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================================= -->
+    <!-- ELDERLY MODAL -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal"
+        id="elderlyModal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="formTitle">
+                        Add Elderly Person
+                    </h2>
+
+                    <p>
+                        Enter elderly care information
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-modal"
+                    onclick="closeElderlyForm()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="elderlyForm"
+                onsubmit="saveElderly(event)"
+            >
+
+                <input
+                    type="hidden"
+                    id="editIndex"
+                    value=""
+                >
+
+
+                <!-- PHOTO -->
+                <div
+                    class="form-group full-width"
+                    style="text-align: center; margin-bottom: 20px;"
+                >
+
+                    <label for="elderlyPhoto">
+                        Profile Photo
+                    </label>
+
+
+                    <div
+                        id="photoUploadBox"
+                        onclick="document.getElementById('elderlyPhoto').click()"
+                        style="
+                            width: 120px;
+                            height: 120px;
+                            margin: 10px auto;
+                            border: 2px dashed #bbb;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            overflow: hidden;
+                            background: #f7f7f7;
+                            font-size: 40px;
+                        "
+                    >
+
+                        <span id="photoPlaceholder">
+                            📷
+                        </span>
+
+                        <img
+                            id="photoPreview"
+                            src=""
+                            alt="Profile Photo Preview"
+                            style="
+                                display: none;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            "
+                        >
+
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="elderlyPhoto"
+                        accept="image/*"
+                        style="display: none;"
+                        onchange="previewElderlyPhoto(event)"
+                    >
+
+                    <small>
+                        Click the photo area to add a photo
+                    </small>
+
+                </div>
+
+
+                <!-- FORM GRID -->
+                <div class="form-grid">
+
+
+                    <!-- FULL NAME -->
+                    <div class="form-group">
+
+                        <label for="elderlyName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="elderlyName"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- AGE -->
+                    <div class="form-group">
+
+                        <label for="elderlyAge">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="elderlyAge"
+                            min="50"
+                            max="120"
+                            placeholder="Enter age"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- GENDER -->
+                    <div class="form-group">
+
+                        <label for="elderlyGender">
+                            Gender
+                        </label>
+
+                        <select
+                            id="elderlyGender"
+                            required
+                        >
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- HEALTH PROBLEM -->
+                    <div class="form-group">
+
+                        <label for="healthProblem">
+                            Health Problem
+                        </label>
+
+                        <input
+                            type="text"
+                            id="healthProblem"
+                            placeholder="e.g. Diabetes"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMERGENCY CONTACT -->
+                    <div class="form-group full-width">
+
+                        <label for="emergencyContact">
+                            Emergency Contact
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="emergencyContact"
+                            placeholder="Enter emergency contact number"
+                        >
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+                    <div class="form-group full-width">
+
+                        <label for="elderlyAddress">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="elderlyAddress"
+                            rows="3"
+                            placeholder="Enter full address"
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BLOOD GROUP -->
+                    <div class="form-group">
+
+                        <label for="bloodGroup">
+                            Blood Group
+                        </label>
+
+                        <select id="bloodGroup">
+
+                            <option value="">
+                                Select Blood Group
+                            </option>
+
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CAREGIVER NAME -->
+                    <div class="form-group">
+
+                        <label for="caregiverName">
+                            Caregiver Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="caregiverName"
+                            placeholder="Enter caregiver name"
+                        >
+
+                    </div>
+
+
+                    <!-- CAREGIVER CONTACT -->
+                    <div class="form-group">
+
+                        <label for="caregiverContact">
+                            Caregiver Contact
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="caregiverContact"
+                            placeholder="Enter caregiver contact"
+                        >
+
+                    </div>
+
+
+                    <!-- NOTES -->
+                    <div class="form-group full-width">
+
+                        <label for="elderlyNotes">
+                            Additional Notes
+                        </label>
+
+                        <textarea
+                            id="elderlyNotes"
+                            rows="3"
+                            placeholder="Enter additional care notes..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeElderlyForm()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Record
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MULTIPLE MEDICINE MODAL -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal"
+        id="medicineModal"
+    >
+
+        <div class="modal-content medicine-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="medicineFormTitle">
+                        Add Medicine Reminder
+                    </h2>
+
+                    <p>
+                        Add multiple medicines and reminder times for one person.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-modal"
+                    onclick="closeMedicineForm()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="medicineForm"
+                onsubmit="saveMedicine(event)"
+            >
+
+                <!-- ELDERLY PERSON -->
+                <div class="form-group full-width">
+
+                    <label for="medicineElderly">
+                        Elderly Person
+                    </label>
+
+                    <select
+                        id="medicineElderly"
+                        required
+                    >
+
+                        <option value="">
+                            Select Person
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- MEDICINE ROWS -->
+                <div id="medicineRows"></div>
+
+
+                <!-- ADD MEDICINE -->
+                <button
+                    type="button"
+                    class="secondary-add-btn"
+                    onclick="addMedicineRow()"
+                >
+                    + Add Medicine
+                </button>
+
+
+                <!-- INFO -->
+                <div
+                    style="
+                        margin-top: 15px;
+                        padding: 14px;
+                        border-radius: 10px;
+                        background: #f5f7fa;
+                        font-size: 14px;
+                        line-height: 1.5;
+                    "
+                >
+
+                    💡
+
+                    <strong>Tip:</strong>
+
+                    If a person takes different medicines in the morning,
+                    afternoon and night, save each medicine separately.
+
+                    Example:
+
+                    Metformin → Morning,
+                    Amlodipine → Afternoon,
+                    Atorvastatin → Night.
+
+                </div>
+
+
+                <!-- ACTIONS -->
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeMedicineForm()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Reminder
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- APPOINTMENT MODAL -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal"
+        id="appointmentModal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="appointmentFormTitle">
+                        Add Appointment
+                    </h2>
+
+                    <p>
+                        Schedule a health appointment
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-modal"
+                    onclick="closeAppointmentForm()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="appointmentForm"
+                onsubmit="saveAppointment(event)"
+            >
+
+                <input
+                    type="hidden"
+                    id="appointmentEditIndex"
+                    value=""
+                >
+
+
+                <div class="form-grid">
+
+
+                    <!-- ELDERLY PERSON -->
+                    <div class="form-group full-width">
+
+                        <label for="appointmentElderly">
+                            Elderly Person
+                        </label>
+
+                        <select
+                            id="appointmentElderly"
+                            required
+                        >
+
+                            <option value="">
+                                Select Person
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DOCTOR -->
+                    <div class="form-group">
+
+                        <label for="doctorName">
+                            Doctor Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="doctorName"
+                            placeholder="e.g. Dr. Sharma"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- APPOINTMENT TYPE -->
+                    <div class="form-group">
+
+                        <label for="appointmentType">
+                            Appointment Type
+                        </label>
+
+                        <select
+                            id="appointmentType"
+                            required
+                        >
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="General Checkup">
+                                General Checkup
+                            </option>
+
+                            <option value="BP Checkup">
+                                BP Checkup
+                            </option>
+
+                            <option value="Diabetes Checkup">
+                                Diabetes Checkup
+                            </option>
+
+                            <option value="Follow-up">
+                                Follow-up
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE -->
+                    <div class="form-group">
+
+                        <label for="appointmentDate">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="appointmentDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TIME -->
+                    <div class="form-group">
+
+                        <label for="appointmentTime">
+                            Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="appointmentTime"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+                    <div class="form-group full-width">
+
+                        <label for="appointmentLocation">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="appointmentLocation"
+                            placeholder="e.g. City Hospital"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CONTACT NUMBER -->
+                    <div class="form-group">
+
+                        <label for="doctorContact">
+                            Doctor/Hospital Contact
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="doctorContact"
+                            placeholder="Enter contact number"
+                        >
+
+                    </div>
+
+
+                    <!-- APPOINTMENT NOTES -->
+                    <div class="form-group">
+
+                        <label for="appointmentNotes">
+                            Notes
+                        </label>
+
+                        <input
+                            type="text"
+                            id="appointmentNotes"
+                            placeholder="Enter appointment notes"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeAppointmentForm()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Appointment
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- SETTINGS MODAL -->
+    <!-- ================================================= -->
+
+    <div
+        class="modal"
+        id="settingsModal"
+    >
+
+        <div class="modal-content settings-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        ⚙️ Settings
+                    </h2>
+
+                    <p>
+                        Manage your ElderCare preferences
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="close-modal"
+                    onclick="closeSettings()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="settings-list">
+
+
+                <!-- DARK MODE -->
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <span class="setting-icon">
+                            🌙
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Dark Mode
+                            </h3>
+
+                            <p>
+                                Use dark theme for the application
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle"
+                            onchange="toggleDarkMode()"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- NOTIFICATIONS -->
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <span class="setting-icon">
+                            🔔
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Notifications
+                            </h3>
+
+                            <p>
+                                Enable medicine and appointment reminders
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notificationToggle"
+                            checked
+                            onchange="toggleNotifications()"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- CLEAR DATA -->
+                <div class="setting-item danger-setting">
+
+                    <div class="setting-info">
+
+                        <span class="setting-icon">
+                            🗑️
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Clear All Data
+                            </h3>
+
+                            <p>
+                                Delete elderly, medicine and appointment data
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-data-btn"
+                        onclick="clearAllData()"
+                    >
+                        Clear Data
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-footer">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeSettings()"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
